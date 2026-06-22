@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SELAMAT ULANG TAHUN UPAA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;min-height:100vh;background:#fce8f0;}
+body{display:flex;align-items:center;justify-content:center;padding:1rem;}
+
+.scene{
+  width:100%;max-width:420px;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#fce8f0;border-radius:16px;overflow:hidden;
+  position:relative;padding:2rem 1rem;padding-top:4.5rem;
+}
+
+.petals-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.petal{
+  position:absolute;opacity:0;
+  border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  animation:petalFall linear infinite;
+}
+@keyframes petalFall{
+  0%{transform:translateY(-30px) rotate(0deg) translateX(0);opacity:0;}
+  10%{opacity:0.75;}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(15px);}
+  90%{opacity:0.4;}
+  100%{transform:translateY(110vh) rotate(360deg) translateX(-10px);opacity:0;}
+}
+
+.env-wrap{
+  position:relative;z-index:10;cursor:pointer;
+  transition:transform 0.25s;
+  filter:drop-shadow(0 8px 24px rgba(153,53,86,0.18));
+}
+.env-wrap:hover{transform:translateY(-4px) scale(1.02);}
+.env-wrap:active{transform:scale(0.98);}
+
+.env-svg-wrap{display:block;width:280px;}
+
+.env-hint{
+  text-align:center;margin-top:16px;
+  font-family:'Lato',sans-serif;font-size:11px;
+  letter-spacing:3px;text-transform:uppercase;color:#c0607a;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+
+.card-overlay{
+  position:absolute;inset:0;
+  background:rgba(252,232,240,0.0);
+  display:flex;align-items:center;justify-content:center;
+  z-index:20;pointer-events:none;transition:background 0.5s;padding:1rem;
+}
+.card-overlay.visible{background:rgba(252,232,240,0.97);pointer-events:auto;}
+
+.card-inner{
+  width:100%;max-width:300px;
+  background:#fffafc;border:0.5px solid #f4c0d1;border-radius:2px;overflow:hidden;
+  opacity:0;transform:translateY(40px) scale(0.92);
+  transition:opacity 0.5s 0.2s,transform 0.5s 0.2s;
+}
+.card-overlay.visible .card-inner{opacity:1;transform:translateY(0) scale(1);}
+
+.card-top{background:#993556;padding:1.5rem 1.25rem 1.25rem;text-align:center;position:relative;overflow:hidden;}
+.card-top-dots{position:absolute;inset:0;pointer-events:none;}
+.card-top-label{font-family:'Lato',sans-serif;font-weight:300;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:#F4C0D1;margin-bottom:0.5rem;}
+.card-top-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:#fff5f8;line-height:1.2;}
+.card-top-title em{font-style:italic;font-weight:400;color:#F4C0D1;}
+.orn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0.7rem auto 0;}
+.orn-line{flex:1;max-width:40px;height:0.5px;background:#D4537E;}
+.orn-heart{font-size:11px;color:#F4C0D1;}
+
+.card-body{padding:1.25rem 1.5rem 1rem;text-align:center;}
+.flowers{font-size:15px;letter-spacing:5px;margin-bottom:0.6rem;color:#D4537E;}
+.card-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:30px;font-weight:500;color:#72243E;margin-bottom:0.15rem;}
+.card-name-sub{font-family:'Lato',sans-serif;font-weight:300;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#D4537E;margin-bottom:1rem;}
+.cdiv{display:flex;align-items:center;gap:6px;margin:0 auto 1rem;max-width:200px;}
+.cdiv-line{flex:1;height:0.5px;background:#F4C0D1;}
+.cdiv-dot{width:3px;height:3px;background:#ED93B1;border-radius:50%;}
+.card-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:#72243E;line-height:1.9;margin-bottom:1rem;}
+.card-wish{font-family:'Lato',sans-serif;font-weight:300;font-size:11.5px;color:#993556;line-height:1.85;margin-bottom:1rem;}
+.hearts-row{display:flex;justify-content:center;gap:6px;}
+.hrt{display:inline-block;font-size:12px;color:#ED93B1;}
+
+.card-footer{border-top:0.5px solid #F4C0D1;padding:0.6rem 1.25rem;display:flex;justify-content:space-between;align-items:center;background:#fff5f8;}
+.card-footer-date{font-family:'Lato',sans-serif;font-size:9px;letter-spacing:2px;color:#D4537E;text-transform:uppercase;}
+.seal-sm{width:26px;height:26px;border-radius:50%;background:#FBEAF0;border:0.5px solid #ED93B1;display:flex;align-items:center;justify-content:center;font-size:13px;color:#993556;}
+
+.close-btn{
+  position:absolute;top:12px;right:14px;
+  background:none;border:0.5px solid #ED93B1;border-radius:50%;
+  width:28px;height:28px;font-size:14px;color:#993556;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:30;opacity:0;transition:opacity 0.3s 0.4s;
+}
+.card-overlay.visible .close-btn{opacity:1;}
+.close-btn:hover{background:#FBEAF0;}
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div class="petals-bg" id="petalsBg"></div>
+
+  <div class="env-wrap" id="envWrap" onclick="openCard()">
+
+    <svg class="env-svg-wrap" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dotpat" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+          <circle cx="6" cy="6" r="0.9" fill="#D4537E" opacity="0.35"/>
+        </pattern>
+      </defs>
+
+
+      <rect x="6" y="8" width="268" height="186" rx="6" fill="#e8b4c4" opacity="0.35"/>
+
+
+      <rect x="2" y="4" width="276" height="186" rx="6" fill="#fff0f5" stroke="#D4537E" stroke-width="1"/>
+
+      <rect x="2" y="4" width="276" height="186" rx="6" fill="url(#dotpat)"/>
+
+
+      <polygon points="2,190 140,110 2,50" fill="#fce0ea" stroke="#D4537E" stroke-width="0.8"/>
+
+      <polygon points="278,190 140,110 278,50" fill="#fce0ea" stroke="#D4537E" stroke-width="0.8"/>
+      
+      <polygon points="2,190 278,190 140,110" fill="#f9d0df" stroke="#D4537E" stroke-width="0.8"/>
+
+
+      <g id="topFlap" style="transform-origin:140px 4px;transform:rotateX(0deg);transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);">
+        <polygon points="2,4 278,4 140,100" fill="#ED93B1" stroke="#D4537E" stroke-width="0.8"/>
+
+        <polyline points="2,4 278,4 140,100 2,4" fill="none" stroke="#c0607a" stroke-width="0.5" stroke-dasharray="4,3"/>
+
+        <text x="140" y="68" text-anchor="middle" font-size="13" fill="#fff0f5" font-family="serif" opacity="0.7">♥</text>
+      </g>
+
+    
+      <g id="envSealG" style="transition:opacity 0.3s;">
+        <circle cx="140" cy="115" r="20" fill="#fce8f0" stroke="#D4537E" stroke-width="1"/>
+        <circle cx="140" cy="115" r="16" fill="none" stroke="#ED93B1" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="140" y="121" text-anchor="middle" font-size="15" fill="#993556" font-family="serif">♡</text>
+      </g>
+
+
+      <text x="14" y="182" font-size="13" fill="#D4537E" opacity="0.6" font-family="serif">✿</text>
+      <text x="255" y="182" font-size="13" fill="#D4537E" opacity="0.6" font-family="serif">✿</text>
+      <text x="14" y="22" font-size="11" fill="#D4537E" opacity="0.4" font-family="serif">❀</text>
+      <text x="256" y="22" font-size="11" fill="#D4537E" opacity="0.4" font-family="serif">❀</text>
+
+
+      <text x="140" y="165" text-anchor="middle" font-size="9" fill="#c0607a" font-family="'Lato',sans-serif" letter-spacing="2" opacity="0.8">UNTUK AUFAA</text>
+    </svg>
+
+    <div class="env-hint" id="envHint">✦ amplopnyaa dii pencett yaaa ✦</div>
+  </div>
+
+  <div class="card-overlay" id="cardOverlay">
+    <button class="close-btn" onclick="closeCard()">✕</button>
+    <div class="card-inner">
+      <div class="card-top">
+        <svg class="card-top-dots" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="dp2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="10" cy="10" r="1" fill="#72243E" opacity="0.4"/>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#dp2)"/>
+        </svg>
+        <p class="card-top-label">for someone special</p>
+        <h1 class="card-top-title">Selamat<br><em>Ulang Tahun</em></h1>
+        <div class="orn">
+          <div class="orn-line"></div>
+          <div class="orn-heart">♥</div>
+          <div class="orn-line"></div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="flowers">✿ ❀ ✿</div>
+        <div class="card-name">Aufaa</div>
+        <div class="card-name-sub"></div>
+        <div class="cdiv">
+          <div class="cdiv-line"></div>
+          <div class="cdiv-dot"></div>
+          <div class="orn-heart" style="font-size:8px;color:#ED93B1;">♥</div>
+          <div class="cdiv-dot"></div>
+          <div class="cdiv-line"></div>
+        </div>
+        <p class="card-msg">
+          "semoga hari ini dan setiap hari<br>
+          senantiasa dipenuhi cinta,dan<br>
+          kebahagiaan."
+        </p>
+        <p class="card-wish">
+          semoga semua hal baik selalu datang ke hidup kamu. semoga kamu selalu sehat, bahagia, dimudahkan dalam mengejar apa yang kamu impikan, dan dikelilingi oleh orang' yang sayang sama kamu. terimakasih yaa udah hadir dan jadi salah satu orang yang bikin hari' aku lebih berwarna. semoga di umur yang baru ini banyak kebahagiaan yang datang ke kamu. aku selalu doain yang terbaik buat kamu.<br>
+          kamu layak mendapat semua hal terindah<br>
+          yang dunia bisa berikan.
+        </p>
+        <div class="hearts-row">
+          <span class="hrt">♡</span>
+          <span class="hrt" style="font-size:16px;color:#D4537E;">♥</span>
+          <span class="hrt">♡</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="card-footer-date">Juni 2026</span>
+        <div class="seal-sm">♡</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const petalsBg = document.getElementById('petalsBg');
+const colors = ['#F4C0D1','#ED93B1','#f9d0df','#D4537E','#fce0ea'];
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.style.left=Math.random()*100+'%';
+  p.style.background=colors[Math.floor(Math.random()*colors.length)];
+  const dur=6+Math.random()*8;
+  p.style.animationDuration=dur+'s';
+  p.style.animationDelay=Math.random()*-dur+'s';
+  const sz=6+Math.random()*9;
+  p.style.width=sz+'px';
+  p.style.height=(sz*1.5)+'px';
+  p.style.transform='rotate('+(Math.random()*360)+'deg)';
+  petalsBg.appendChild(p);
+}
+
+function openCard(){
+  const flap=document.getElementById('topFlap');
+  const seal=document.getElementById('envSealG');
+  const hint=document.getElementById('envHint');
+  const wrap=document.getElementById('envWrap');
+  const overlay=document.getElementById('cardOverlay');
+  flap.style.transform='rotateX(180deg)';
+  seal.style.opacity='0';
+  hint.style.opacity='0';
+  setTimeout(()=>{
+    wrap.style.opacity='0';
+    wrap.style.pointerEvents='none';
+    overlay.classList.add('visible');
+  },600);
+}
+
+function closeCard(){
+  const overlay=document.getElementById('cardOverlay');
+  const wrap=document.getElementById('envWrap');
+  overlay.classList.remove('visible');
+  setTimeout(()=>{
+    wrap.style.opacity='1';wrap.style.pointerEvents='auto';
+    document.getElementById('topFlap').style.transform='';
+    document.getElementById('envSealG').style.opacity='1';
+    document.getElementById('envHint').style.opacity='1';
+  },500);
+}
+</script>
+</body>
+</html>
